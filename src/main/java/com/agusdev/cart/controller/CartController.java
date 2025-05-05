@@ -1,8 +1,11 @@
 package com.agusdev.cart.controller;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 
 import com.agusdev.cart.model.Cart;
 import com.agusdev.cart.model.CartItem;
 import com.agusdev.cart.service.ICartService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,6 +13,9 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/carts")
+//Swagger
+@Tag(name = "Cart", description = "API for managing the cart")
+
 public class CartController {
 
     @Autowired
