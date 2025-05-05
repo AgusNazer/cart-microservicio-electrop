@@ -1,5 +1,6 @@
 package com.agusdev.cart.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
@@ -13,6 +14,7 @@ public class CartItem {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cart_id")
+    @JsonIgnore
     private Cart cart;
 
     @Column(name = "product_id", nullable = false)
