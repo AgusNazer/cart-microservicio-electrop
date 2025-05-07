@@ -43,7 +43,9 @@ public class CartController {
 
     // Agregar un item a un carrito
     @PostMapping("/{cartId}/items")
+    @Operation(summary = "add item to cart", description = "pasarle productId para agregar el item al carrito")
     public Cart addItemToCart(@PathVariable Long cartId, @RequestBody CartItem cartItem) {
+        System.out.println("Item"  + cartItem + " agregado al carrito");
         return cartService.addItemToCart(cartId, cartItem);
     }
 
@@ -66,6 +68,7 @@ public class CartController {
     }
     //Cehckea que haya stock para hacer un checkout
     @PostMapping("/{cartId}/checkout")
+    @Operation(summary = "Checkout del carrito", description = "Procesa el checkout del carrito con el ID proporcionado, validando stock y generando la venta.")
     public ResponseEntity<String> checkout(@PathVariable Long cartId) {
         try {
             boolean success = cartService.checkoutCart(cartId);
