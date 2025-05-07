@@ -21,4 +21,5 @@ public interface ICartService {
 
     void deleteCart(Long cartId);
 
+    boolean checkoutCart(Long cartId);
 }

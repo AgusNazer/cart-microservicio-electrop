@@ -7,6 +7,8 @@ import com.agusdev.cart.model.CartItem;
 import com.agusdev.cart.service.ICartService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -62,4 +64,19 @@ public class CartController {
     public void deleteCart(@PathVariable Long cartId) {
         cartService.deleteCart(cartId);
     }
+    //Cehckea que haya stock para hacer un checkout
+    @PostMapping("/{cartId}/checkout")
+    public ResponseEntity<String> checkout(@PathVariable Long cartId) {
+        try {
+            boolean success = cartService.checkoutCart(cartId);
+            if (success) {
+                return ResponseEntity.ok("Checkout successful. Sale created.");
+            } else {
+                return ResponseEntity.badRequest().body("Checkout failed: insufficient stock.");
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Checkout failed: " + e.getMessage());
+        }
+    }
+
 }
