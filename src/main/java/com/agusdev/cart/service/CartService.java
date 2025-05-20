@@ -56,7 +56,14 @@ public class CartService implements ICartService {
         Optional<Cart> cartOpt = cartRepository.findById(cartId);
         if (cartOpt.isPresent()) {
             Cart cart = cartOpt.get();
-            //Llamada al servicio products usando Feign
+
+            // Validación y log
+            if (cartItem.getProductId() == null) {
+                throw new RuntimeException("El producto no tiene ID, no se puede buscar.");
+            }
+            System.out.println("🧪 Product ID recibido: " + cartItem.getProductId());
+
+            // Llamada al servicio products usando Feign
             ProductDto productDto = productClient.getProductById(cartItem.getProductId());
             if (productDto == null) {
                 throw new RuntimeException("Producto no encontrado en el servicio products.");
@@ -67,7 +74,7 @@ public class CartService implements ICartService {
             cartItemRepository.save(cartItem); // Guarda el item
             return cartRepository.save(cart); // Guarda y devuelve el carrito actualizado
         }
-        return null;
+        throw new RuntimeException("Carrito no encontrado con ID: " + cartId);
     }
 
     @Override

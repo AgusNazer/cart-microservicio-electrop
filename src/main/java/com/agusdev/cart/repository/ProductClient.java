@@ -10,7 +10,7 @@ import java.util.List;
 
 import com.agusdev.cart.dto.ProductDto;
 
-@FeignClient(name = "products")  // Nombre del servicio registrado en Eureka
+@FeignClient(name = "products", url = "http://localhost:8762")  // Nombre del servicio registrado en Eureka
 public interface ProductClient {
 
     @GetMapping("/products/{idProduct}")  // Ruta para obtener un producto por ID

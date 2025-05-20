@@ -6,12 +6,12 @@ import java.util.List;
 public class CartDto {
     private Long id;
     private BigDecimal totalPrice;
-    private List<CartItemDto.CartItemDTO> items;
+    private List<CartItemDto> items;
 
     public CartDto() {
     }
 
-    public CartDto(Long id, BigDecimal totalPrice, List<CartItemDto.CartItemDTO> items) {
+    public CartDto(Long id, BigDecimal totalPrice, List<CartItemDto> items) {
         this.id = id;
         this.totalPrice = totalPrice;
         this.items = items;
@@ -33,11 +33,11 @@ public class CartDto {
         this.totalPrice = totalPrice;
     }
 
-    public List<CartItemDto.CartItemDTO> getItems() {
+    public List<CartItemDto> getItems() {
         return items;
     }
 
-    public void setItems(List<CartItemDto.CartItemDTO> items) {
+    public void setItems(List<CartItemDto> items) {
         this.items = items;
     }
 }
